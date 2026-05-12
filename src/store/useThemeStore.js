@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export const useThemeStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       isDarkMode: true,
       toggleTheme: () => set((state) => {
         const newMode = !state.isDarkMode;
@@ -15,7 +15,7 @@ export const useThemeStore = create(
         return { isDarkMode: newMode };
       }),
       initTheme: () => {
-        const isDark = useThemeStore.getState().isDarkMode;
+        const isDark = get().isDarkMode;
         if (isDark) {
           document.documentElement.classList.add('dark');
         } else {

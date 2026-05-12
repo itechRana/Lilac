@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, Reorder } from 'framer-motion'
-import { Calendar, Clock, MapPin, Trash2, Plus, GripVertical } from 'lucide-react'
+import { Calendar, Clock, MapPin, Trash2, Plus, GripVertical, Sparkles } from 'lucide-react'
 import { useAppStore } from '../../store/useAppStore'
 
 const UserSchedulePlanner = () => {
@@ -40,8 +40,8 @@ const UserSchedulePlanner = () => {
                   className="glass-card rounded-2xl p-4 flex items-center gap-4 group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-festival flex flex-col items-center justify-center text-white shrink-0">
-                    <span className="text-[10px] uppercase font-bold opacity-80">{item.time.split(':')[0]}</span>
-                    <span className="text-sm font-bold leading-none">{item.time.split(':')[1]}</span>
+                    <span className="text-[10px] uppercase font-bold opacity-80">{(item.time || '12:00').split(':')[0]}</span>
+                    <span className="text-sm font-bold leading-none">{(item.time || '12:00').split(':')[1]}</span>
                   </div>
                   
                   <div className="flex-1">

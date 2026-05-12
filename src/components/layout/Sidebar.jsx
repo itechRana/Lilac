@@ -25,6 +25,14 @@ const Sidebar = ({ isOpen, onClose }) => {
     { id: 'settings', icon: <Settings className="w-5 h-5" />, label: 'الاعدادات', path: '/settings' },
   ]
 
+  const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 1024)
+
+  React.useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const sidebarVariants = {
     open: { x: 0, opacity: 1 },
     closed: { x: '-100%', opacity: 0 },
@@ -41,11 +49,11 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
 
       <motion.aside
-        initial="closed"
-        animate={isOpen ? 'open' : 'closed'}
+        initial={isDesktop ? "open" : "closed"}
+        animate={isDesktop ? "open" : (isOpen ? "open" : "closed")}
         variants={sidebarVariants}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className={`fixed top-0 left-0 bottom-0 w-64 glass-card z-50 lg:translate-x-0 lg:opacity-100 m-4 rounded-3xl overflow-hidden flex flex-col`}
+        className={`fixed top-0 left-0 bottom-0 w-64 glass-card z-50 m-4 rounded-3xl overflow-hidden flex flex-col`}
       >
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
